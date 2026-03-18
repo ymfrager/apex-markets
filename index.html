@@ -2264,7 +2264,7 @@ async function runAc(inputId,dropId,q){
   const res=await searchSym(q);
   // Widen filter — include stocks, ETFs, crypto, ADRs, funds
   const ALLOWED=['Common Stock','ETP','Crypto','ADR','ETF','Fund',''];
-  const all=res?.result||[];
+  const all=Array.isArray(res)?res:(res?.result||[]);
   const items=all
     .filter(r=>!r.type||ALLOWED.some(t=>r.type.includes(t)))
     .slice(0,10);
@@ -4502,4 +4502,3 @@ if(document.readyState==='loading'){
 </script>
 </body>
 </html>
-
